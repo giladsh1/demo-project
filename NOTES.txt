@@ -1,2 +1,4 @@
 - terraform should have a backend (s3) and lock (dynamoDB)
+- no actual service discovery here
+- need to create IAM roles for each service and github
 - 

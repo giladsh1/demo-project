@@ -7,11 +7,13 @@ on:
       - code/vue-realworld-example-app/**
 jobs:
   deploy:
-    name: deploy to cluster
+    name: CD pipline for frontend
+
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: code/vue-realworld-example-app
+
     steps:
     - name: Checkout
       uses: actions/checkout@v2

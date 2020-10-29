@@ -16,8 +16,8 @@ spec:
       restartPolicy: Always
       containers:
         - name: frontend
-          image: 952034392840.dkr.ecr.eu-west-1.amazonaws.com/frontend:latest
-          imagePullPolicy: Always
+          image: 952034392840.dkr.ecr.eu-west-1.amazonaws.com/frontend
+          imagePullPolicy: IfNotPresent
           resources:
             requests:
               cpu: 100m

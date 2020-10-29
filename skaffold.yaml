@@ -1,0 +1,16 @@
+apiVersion: skaffold/v2beta5
+kind: Config
+build:
+  local:
+    push: false
+    concurrency: 0
+  artifacts:
+
+    - image: 121680758327.dkr.ecr.eu-west-1.amazonaws.com/backend
+      context: code/golang-echo-realworld-example-app
+    - image: 121680758327.dkr.ecr.eu-west-1.amazonaws.com/frontend
+      context: code/vue-realworld-example-app
+deploy:
+  kubectl:
+    manifests:
+      - bonus/local-deploy/**

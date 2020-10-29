@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      # affinity:
+      #   nodeAffinity:
+      #     requiredDuringSchedulingIgnoredDuringExecution:
+      #       nodeSelectorTerms:
+      #         - matchExpressions:
+      #             - key: cloud.google.com/gke-nodepool
+      #               operator: In
+      #               values:
+      #                 - persistent-apps
+        # podAntiAffinity:
+        #   preferredDuringSchedulingIgnoredDuringExecution:
+        #     - weight: 1
+        #       podAffinityTerm:
+        #         topologyKey: kubernetes.io/hostname
+        #         labelSelector:
+        #           matchLabels:
+        #             app: backend
+      restartPolicy: Always
+      containers:
+        - name: backend
+          image: 121680758327.dkr.ecr.eu-west-1.amazonaws.com/backend:latest
+          imagePullPolicy: Always
+          resources:
+            requests:
+              cpu: 100m
+              memory: 50Mi
+            limits:
+              cpu: 100m
+              memory: 50Mi
+          ports:
+            - name: backend-port
+              containerPort: 8585
+          readinessProbe:
+            tcpSocket:
+              port: backend-port
+            periodSeconds: 5
+            successThreshold: 2
+            failureThreshold: 8
+          livenessProbe:
+            tcpSocket:
+              port: backend-port
+            periodSeconds: 15
+            failureThreshold: 4

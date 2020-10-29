@@ -1,0 +1,2 @@
+- terraform should have a backend (s3) and lock (dynamoDB)
+- 
